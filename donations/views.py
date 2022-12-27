@@ -1,3 +1,22 @@
 from django.shortcuts import render
+from rest_framework import generics, status
 
-# Create your views here.
+
+class DonationView(generics.ListCreateAPIView):
+    ...
+
+
+class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):
+    ...
+
+
+class DonationUserView(generics.ListAPIView):
+    ...
+
+
+class DonationExpandView(generics.ListCreateAPIView):
+    ...
+
+
+class DonationExpandDetailView(generics.RetrieveUpdateDestroyAPIView):
+    ...
