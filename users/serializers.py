@@ -35,5 +35,4 @@ class UserSerializer(serializers.ModelSerializer):
         address_data = validated_data.pop("address")
         address = Address.objects.create(**address_data)
         user = User.objects.create(address=address, **validated_data)
-        
         return user
