@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 import uuid
 
 
@@ -9,10 +9,13 @@ class Type(models.TextChoices):
     DEFAULT = "Not Informed"
 
 
-class User(models.Model):
+class User(AbstractBaseUser):
+
+    USERNAME_FIELD = "email"
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100, null=True)
+    email = models.EmailField(unique=True, null=False)
+    password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     cnpj_cpf = models.CharField(max_length=18, unique=True)
     responsible = models.CharField(max_length=100)
@@ -20,3 +23,4 @@ class User(models.Model):
     type = models.CharField(max_length=12, choices=Type.choices, default=Type.DEFAULT)
     isAdm = models.BooleanField(default=False)
     address = models.OneToOneField("addresses.Address", on_delete=models.CASCADE)
+    
