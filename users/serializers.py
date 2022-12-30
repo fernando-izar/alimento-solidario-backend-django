@@ -2,22 +2,18 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from .models import User, Type
 from addresses.serializers import AddressSerializer
+from addresses.models import Address
 
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
         required=True, validators=[UniqueValidator(queryset=User.objects.all())]
     )
-    password = serializers.CharField(min_length=4, write_only=True)
-    name = serializers.CharField(required=True)
     cnpj_cpf = serializers.CharField(
         required=True, validators=[UniqueValidator(queryset=User.objects.all())]
     )
-    responsible = serializers.CharField(required=True)
-    contact = serializers.CharField(required=True)
     type = serializers.ChoiceField(choices=Type.choices, default=Type.DEFAULT)
-    isAdm = serializers.BooleanField(default=False)
-    address = AddressSerializer(required=True)
+    address = AddressSerializer()
 
     class Meta:
         model = User
@@ -33,3 +29,11 @@ class UserSerializer(serializers.ModelSerializer):
             "isAdm",
             "address",
         )
+        extra_kwargs = {"password": {"write_only": True}}
+
+    def create(self, validated_data):
+        address_data = validated_data.pop("address")
+        address = Address.objects.create(**address_data)
+        user = User.objects.create(address=address, **validated_data)
+        
+        return user

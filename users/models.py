@@ -12,7 +12,7 @@ class Type(models.TextChoices):
 class User(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=100)
+    password = models.CharField(max_length=100, null=True)
     name = models.CharField(max_length=100)
     cnpj_cpf = models.CharField(max_length=18, unique=True)
     responsible = models.CharField(max_length=100)
