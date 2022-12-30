@@ -14,7 +14,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
-    cnpj_cpf = models.CharField(max_length=18)
+    cnpj_cpf = models.CharField(max_length=18, unique=True)
     responsible = models.CharField(max_length=100)
     contact = models.CharField(max_length=50)
     type = models.CharField(max_length=12, choices=Type.choices, default=Type.DEFAULT)
