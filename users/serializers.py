@@ -28,8 +28,10 @@ class UserSerializer(serializers.ModelSerializer):
             "type",
             "isAdm",
             "address",
+            "isActive",
         )
         extra_kwargs = {"password": {"write_only": True}}
+        methods = ["DELETE", "GET", "POST", "PUT", "PATCH"]
 
     def create(self, validated_data):
         address_data = validated_data.pop("address")
@@ -38,3 +40,14 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data["password"])
         user.save()
         return user
+
+    def update(self, instance, validated_data):
+        address_data = validated_data.pop("address")
+        address = instance.address
+        for attr, value in address_data.items():
+            setattr(address, attr, value)
+        address.save()
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance

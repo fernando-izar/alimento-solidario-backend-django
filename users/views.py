@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsAdm
+from .permissions import IsAdm, IsOwnerOrAdm
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer
 from .models import User
+import ipdb
 
 
 class UserView(generics.ListCreateAPIView):
@@ -18,7 +19,6 @@ class UserView(generics.ListCreateAPIView):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
 
 class SoftDeleteUserView(generics.DestroyAPIView):
     queryset = User.objects.all()
@@ -36,11 +36,15 @@ class SoftDeleteUserView(generics.DestroyAPIView):
         else:
             raise PermissionError("You can't delete other users")
         
-    
-        
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
-    ...
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsOwnerOrAdm]
+
+    
 
 
 class UserProfileView(generics.ListAPIView):
