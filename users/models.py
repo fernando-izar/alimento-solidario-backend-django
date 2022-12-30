@@ -28,4 +28,4 @@ class User(AbstractBaseUser):
     type = models.CharField(max_length=12, choices=Type.choices, default=Type.DEFAULT)
     isAdm = models.BooleanField(default=False)
     address = models.OneToOneField("addresses.Address", on_delete=models.CASCADE)
-    
+    isActive = models.BooleanField(default=True)
