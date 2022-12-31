@@ -6,13 +6,8 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
 from .serializers import UserSerializer
 from .models import User
-import ipdb
-from django.views.generic import View
-from django.shortcuts import get_object_or_404
 from .serializers import UserSerializer
 from rest_framework.response import Response
-from django.views.decorators.csrf import csrf_exempt
-
 
 
 class UserView(generics.ListCreateAPIView):
@@ -26,31 +21,6 @@ class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class SoftDeleteUserView(View):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsAdm]
-
-    def delete(self, request, *args, **kwargs):
-        user = self.request.user
-        user.isActive = False
-        user.save()
-
-
-    # queryset = User.objects.all()
-    # serializer_class = UserSerializer
-
-    # authentication_classes = [JWTAuthentication]
-    # permission_classes = [IsAuthenticated]
-
-    # def perform_destroy(self, instance):
-    #     user = self.request.user
-
-    #     if user == instance:
-    #         instance.isActive = False
-    #         instance.save()
-    #     else:
-    #         raise PermissionError("You can't delete other users")
-        
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
@@ -60,11 +30,16 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated, IsOwnerOrAdm]
 
     
-    
-
-
 class UserProfileView(generics.ListAPIView):
-    ...
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.filter(pk=self.request.user.pk)
+
 
 class UserSoftDeleteView(generics.UpdateAPIView):
     authentication_classes = [JWTAuthentication]

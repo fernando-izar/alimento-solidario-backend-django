@@ -13,8 +13,8 @@ class CustomUserManager(BaseUserManager):
     def get_by_natural_key(self, email):
         return self.get(email=email)
 
-class User(AbstractBaseUser):
 
+class User(AbstractBaseUser):
     email = models.EmailField(unique=True, null=False)
     objects = CustomUserManager()
     USERNAME_FIELD = "email"
