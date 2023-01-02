@@ -23,5 +23,10 @@ class ClassificationDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ClassificationSerializer
 
 
-class ClassificationNameView(generics.ListAPIView):
-    ...
+class ClassificationNameView(generics.RetrieveAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    queryset = Classification.objects.all()
+    serializer_class = ClassificationSerializer
+    lookup_field = "name"
