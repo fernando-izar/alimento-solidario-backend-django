@@ -15,10 +15,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     default_error_messages = {
         "no_active_account": "Incorrect email and/or password",}
 
-    
-    
-    
-
 
 class CustomTokenObtainPairView(jwt_views.TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
