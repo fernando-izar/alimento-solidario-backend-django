@@ -3,8 +3,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Donations
-from .serializers import DonationSerializer, DonationExpandSerializer, DonationFromUserSerializer
-from .permissions import IsAccountOwner
+from .serializers import *
 from classifications.models import Classification
 
 
@@ -26,35 +25,33 @@ class DonationView(generics.ListCreateAPIView):
 
 class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAccountOwner]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-    serializer_class = DonationExpandSerializer
+    serializer_class = DonationDetailSerializer
     queryset = Donations.objects.all()
-
-    lookup_url_kwarg = "pk"
-
 
 class DonationUserView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAccountOwner]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-    serializer_class = DonationFromUserSerializer
-    queryset = Donations.objects.all()
+    serializer_class = DonationUserSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return [user]
 
 
-class DonationExpandView(generics.ListCreateAPIView):
+class DonationExpandView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAccountOwner]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     serializer_class = DonationExpandSerializer
     queryset = Donations.objects.all()
 
 
-class DonationExpandDetailView(generics.RetrieveUpdateDestroyAPIView):
+class DonationExpandDetailView(generics.RetrieveAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAccountOwner]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-    serializer_class = DonationExpandSerializer
+    serializer_class = DonationExpandDetailSerializer
     queryset = Donations.objects.all()
-
-    lookup_url_kwarg = "pk"

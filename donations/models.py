@@ -10,7 +10,7 @@ class Donations(models.Model):
     available = models.BooleanField(default=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE, related_name='donations')
     classification = models.ForeignKey(
         "classifications.Classification", on_delete=models.CASCADE
     )
