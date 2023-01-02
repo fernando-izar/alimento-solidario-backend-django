@@ -8,4 +8,4 @@ class Address(models.Model):
     complement = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=2)
-    zipcode = models.CharField(max_length=9)
+    zipCode = models.CharField(max_length=9)
