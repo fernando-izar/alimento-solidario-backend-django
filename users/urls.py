@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.exceptions import AuthenticationFailed
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -10,6 +11,13 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data.pop("refresh")
         data["token"] = data.pop("access")
         return data
+    
+    default_error_messages = {
+        "no_active_account": "Incorrect email and/or password",}
+
+    
+    
+    
 
 
 class CustomTokenObtainPairView(jwt_views.TokenObtainPairView):
