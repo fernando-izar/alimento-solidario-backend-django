@@ -102,6 +102,7 @@ DATABASES = {
         "USER": os.getenv("POSTGRES_USER"),
         "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
         "HOST": "db_alimento_solidario",
+        #"HOST": "127.0.0.1",
         "PORT": "5432",
     },
     "old_default": {
