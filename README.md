@@ -58,6 +58,15 @@ Thanks to the following people who contributed to this project:
         </sub>
       </a>
     </td>
+    </td>
+     <td align="center">
+      <a href="https://github.com/FelipeGeazi">
+        <img src="https://avatars.githubusercontent.com/u/30714019?v=4" width="100px;" alt="Foto de Felipe Geazi no GitHub"/ target="_blanck" ><br>
+        <sub>
+          <b>Felipe Geazi</b>
+        </sub>
+      </a>
+    </td>
   </tr>
 </table>
 
