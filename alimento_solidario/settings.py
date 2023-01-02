@@ -31,7 +31,10 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["ec2-54-232-73-207.sa-east-1.compute.amazonaws.com"]
+ALLOWED_HOSTS = [
+    "ec2-54-232-73-207.sa-east-1.compute.amazonaws.com",
+    "localhost",
+]
 
 
 # Application definition
@@ -156,3 +159,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "users.User"
+
+ALLOWED_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]

@@ -4,9 +4,9 @@ ENV PYTHONDONTEWRITEBYTECODE 1
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /django_app
+WORKDIR /app_django
 
-COPY . /django_app
+COPY . /app_django
 
 RUN pip install -U pip
 RUN pip install -r requirements.txt
