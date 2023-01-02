@@ -5,20 +5,23 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Donations
 from .serializers import DonationSerializer, DonationExpandSerializer, DonationFromUserSerializer
 from .permissions import IsAccountOwner
+from classifications.models import Classification
 
 
 class DonationView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get_serializer_class(self, request):
+    def get_serializer_class(self):
         return DonationSerializer
 
     def get_queryset(self):
         return Donations.objects.all()
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        classification_id = self.request.data['classification']
+        classification = Classification.objects.get(pk=classification_id)
+        serializer.save(user=self.request.user, classification=classification)
 
 
 class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):

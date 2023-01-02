@@ -1,8 +1,11 @@
 from rest_framework import serializers
 from .models import Donations
 from users.models import User
+from users.serializers import UserSerializer
 
 class DonationSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Donations
         fields = [
@@ -11,11 +14,14 @@ class DonationSerializer(serializers.ModelSerializer):
         "quantity", 
         "expiration", 
         "available", 
-        "createdAt", 
-        "updatedAt", 
+        "createdAt",
+        "updatedAt",
         "classification",
+        "user",
         ]
-        extra_kwargs = {"createdAt": {"auto_now_add": True}, "updatedAt": {"auto_now": True}}
+        depth=1
+
+        
 
 class DonationExpandSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,6 +38,7 @@ class DonationExpandSerializer(serializers.ModelSerializer):
         "classification",
         ]
 
+
 class DonationFromUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -47,3 +54,4 @@ class DonationFromUserSerializer(serializers.ModelSerializer):
         "donations",
         "address",
         ]
+        depth=1
