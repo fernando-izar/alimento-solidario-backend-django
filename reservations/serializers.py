@@ -7,17 +7,28 @@ from datetime import datetime
 
 
 
-class ReservationsSerializer(serializers.ModelSerializer):
+class ReservationSerializer(serializers.ModelSerializer):
 
+    user = UserSerializer()
+ 
+    class Meta:
+        model = Reservations
+        fields = ["id", "date", "donations", "user"]
+        
+        depth = 1
+
+
+class ReservationDetailSerializer(serializers.ModelSerializer):
+           
+        
+    user = UserSerializer()
+    donation = DonationsSerializer()
  
     class Meta:
         model = Reservations
         fields = ["id", "date", "donation", "user"]
-
-        read_only_fields = ['user']
         
-        depth = 1
-
+        depth = 2
    
 
         
