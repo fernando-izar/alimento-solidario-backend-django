@@ -45,7 +45,7 @@ class DonationExpandView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    serializer_class = DonationExpandSerializer
+    serializer_class = DonationSerializer
     queryset = Donations.objects.all()
 
 

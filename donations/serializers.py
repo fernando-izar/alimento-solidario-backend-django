@@ -4,6 +4,7 @@ from users.models import User
 from users.serializers import UserSerializer
 
 class DonationSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Donations
         fields = [
@@ -15,7 +16,8 @@ class DonationSerializer(serializers.ModelSerializer):
         "createdAt",
         "updatedAt",
         "classification",
-        ]
+        "user",
+        ]        
         depth=1
 
         
@@ -62,16 +64,17 @@ class DonationExpandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donations
         fields = [
-        "id", 
-        "food", 
-        "quantity", 
-        "expiration", 
-        "available", 
-        "createdAt", 
-        "updatedAt", 
+        "id",
+        "food",
+        "quantity",
+        "expiration",
+        "available",
+        "createdAt",
+        "updatedAt",
         "user",
         "classification",
         ]
+        read_only_fields=['user']
         depth=1
 
 

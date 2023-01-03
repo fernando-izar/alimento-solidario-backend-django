@@ -27,8 +27,8 @@ class UserSerializer(serializers.ModelSerializer):
             "contact",
             "type",
             "isAdm",
-            "address",
             "isActive",
+            "address",
         )
         extra_kwargs = {"password": {"write_only": True}}
         methods = ["DELETE", "GET", "POST", "PUT", "PATCH"]
