@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
         required=True, validators=[UniqueValidator(queryset=User.objects.all())]
     )
     cnpj_cpf = serializers.CharField(
-        required=True, validators=[UniqueValidator(queryset=User.objects.all())]
+        required=True, validators=[UniqueValidator(queryset=User.objects.all(), message="This field must be unique.")]
     )
     type = serializers.ChoiceField(choices=Type.choices, default=Type.DEFAULT)
     address = AddressSerializer()
