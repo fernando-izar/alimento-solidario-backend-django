@@ -29,3 +29,6 @@ class User(AbstractBaseUser):
     isAdm = models.BooleanField(default=False)
     address = models.OneToOneField("addresses.Address", on_delete=models.CASCADE)
     isActive = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = "company"
