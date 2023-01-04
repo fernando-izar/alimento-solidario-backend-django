@@ -8,6 +8,7 @@ from .serializers import UserSerializer
 from .models import User
 from .serializers import UserSerializer
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
 
 class UserView(generics.ListCreateAPIView):
@@ -28,6 +29,14 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsOwnerOrAdm]
+
+    lookup_field = "pk"
+
+    # def get(self, request, pk):
+    #     user = get_object_or_404(User, pk=pk)
+    #     self.check_object_permissions(request, user)
+    #     serializer = UserSerializer(user)
+    #     return Response(serializer.data)
 
     
 class UserProfileView(generics.ListAPIView):
