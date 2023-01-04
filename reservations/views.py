@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics, status
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from .models import Reservations
 from users.models import User
 from .serializers import *
@@ -13,20 +13,22 @@ from reservations.permissions import *
 
 class ReservationView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsCharity]
 
     queryset = Reservations.objects.all()
     serializer_class = ReservationSerializer
 
     def perform_create(self, serializer):
        
-       donation_id = self.request.data["donationId"]
-       donation_obj = Donations.objects.get(pk = donation_id)
+       donation_id = self.request.data["donation_id"]
+       donation_obj = get_object_or_404(Donations, id=donation_id) 
        serializer.save(user=self.request.user, donation =  donation_obj)
+      
+       
 
 class ReservationDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly,IsCharity]
 
     queryset = Reservations.objects.all()
     serializer_class = ReservationDetailSerializer
@@ -35,14 +37,11 @@ class ReservationDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 class ReservationUserView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     serializer_class = ReservationSerializer
     queryset = Reservations.objects.all()
 
-    """ def get_queryset(self): 
-        user = self.request.user
-        return user.id """
 
 
     
