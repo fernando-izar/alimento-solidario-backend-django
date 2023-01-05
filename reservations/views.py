@@ -7,7 +7,7 @@ from users.models import User
 from .serializers import *
 from django.shortcuts import get_object_or_404
 from donations.models import Donations
-from rest_framework.views import  Request
+from rest_framework.views import  Request, APIView
 from reservations.permissions import *
 
 
@@ -22,18 +22,27 @@ class ReservationView(generics.ListCreateAPIView):
        
        donation_id = self.request.data["donation_id"]
        donation_obj = get_object_or_404(Donations, id=donation_id) 
+    
+       
        serializer.save(user=self.request.user, donation =  donation_obj)
-      
        
 
-class ReservationDetailView(generics.RetrieveUpdateDestroyAPIView):
+class ReservationDetailView(generics.CreateAPIView,generics.DestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly,IsCharity]
 
     queryset = Reservations.objects.all()
     serializer_class = ReservationDetailSerializer
 
-    lookup_url_kwarg = "pk"
+    lookup_url_kwarg = "pk" 
+    
+
+    def perform_create(self, serializer):
+       donation_id = self.kwargs["pk"]
+       donation_obj = get_object_or_404(Donations, pk=donation_id) 
+       serializer.save(user=self.request.user, donation_id=donation_obj)
+
+      
 
 class ReservationUserView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
