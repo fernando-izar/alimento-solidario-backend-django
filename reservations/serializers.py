@@ -44,7 +44,7 @@ class ReservationDetailSerializer(serializers.ModelSerializer):
 class ReservationDetailCreateSerializer(serializers.ModelSerializer):
   
     user = UserSerializer(read_only = True)
-    donation_id= serializers.CharField(read_only = True)
+    donation_id= serializers.CharField(read_only = True, validators=[UniqueValidator(queryset=Reservations.objects.all())])
    
     class Meta:
         model = Reservations
@@ -52,8 +52,12 @@ class ReservationDetailCreateSerializer(serializers.ModelSerializer):
         depth = 3
 
     def create(self,validated_data):
+
+        donation_ids = validated_data['donation']
+        if Reservations.objects.filter(donation= donation_ids).exists():
+            raise serializers.ValidationError({"message":"Doação já reservada"})
         reservation = Reservations.objects.create(**validated_data)
-        reservation.save()
+        
         return reservation    
 
     def get_donation(self, obj: Reservations):

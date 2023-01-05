@@ -43,6 +43,7 @@ class ReservationCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
        donation_id = self.kwargs["pk"]
        donation_obj = get_object_or_404(Donations, id=donation_id) 
+
        serializer.save(user=self.request.user, donation =  donation_obj)
 
 class ReservationUserView(generics.ListAPIView):
