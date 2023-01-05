@@ -5,11 +5,12 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Donations
 from .serializers import *
 from classifications.models import Classification
+from .permissions import *
 
 
 class DonationView(generics.ListCreateAPIView):
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsDonor, ValidatedExpiration]
 
     def get_serializer_class(self):
         return DonationSerializer
