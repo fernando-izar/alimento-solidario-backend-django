@@ -8,6 +8,7 @@ from .serializers import UserSerializer
 from .models import User
 from .serializers import UserSerializer
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
 
 class UserView(generics.ListCreateAPIView):
@@ -29,7 +30,15 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated, IsOwnerOrAdm]
 
-    
+    lookup_field = "pk"
+
+    def update(self, request, *args, **kwargs):
+        user = self.get_object()
+        if not user.isActive:
+            return Response({"error": "User already deleted"}, status=status.HTTP_400_BAD_REQUEST)
+        return super().update(request, *args, **kwargs)
+
+      
 class UserProfileView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -51,6 +60,8 @@ class UserSoftDeleteView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         user = self.get_object()
+        if not user.isActive:
+            return Response({"error": "User already deleted"}, status=status.HTTP_400_BAD_REQUEST)
         user.isActive = False
         user.save()
         serializer = self.get_serializer(user)
