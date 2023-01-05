@@ -182,7 +182,7 @@ class UserRegisterViewTest(APITestCase):
 
     # Verify if cannot update user by id with invalid id
     def test_cannot_update_user_by_id_with_invalid_id(self):
-        user = baker.make(User, type="donor", email="test@mail.com", password="123456")
+        user = baker.make(User, type="donor", email="test@mail.com", password="123456", isAdm=True)
         user.set_password(user.password)
         user.save()
 
@@ -191,10 +191,11 @@ class UserRegisterViewTest(APITestCase):
         response = self.client.post(url, data)
         user_token = response.data["token"]
 
-        headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {user_token}")
+        # headers = {"AUTHORIZATION": f"Bearer {user_token}"}
         data = {"name": "Updated"}
         url = f"{self.BASE_URL}invalid_id/"
-        response = self.client.patch(url, data, **headers)
+        response = self.client.patch(url, data)
         expected_status_code = status.HTTP_404_NOT_FOUND
         resulted_status_code = response.status_code
         msg = "Verify if the status code is 404 when trying to update a user with invalid id"
