@@ -30,34 +30,21 @@ class ReservationDetailView(generics.DestroyAPIView):
     queryset = Reservations.objects.all()
     serializer_class = ReservationDetailSerializer
     lookup_url_kwarg = "pk" 
-    
-    """ def perform_create(self, serializer):
-       donation_id = self.kwargs["pk"]
-       donation_obj = get_object_or_404(Donations, pk=donation_id) 
-       serializer.save(user=self.request.user, donation_id=donation_obj) 
- """
+
 class ReservationCreateView(generics.CreateAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly, IsCharity]
 
     queryset = Reservations.objects.all()
-    serializer_class = ReservationDetailSerializer
+    serializer_class = ReservationDetailCreateSerializer
 
-    
+    lookup_field = "pk"
 
     def perform_create(self, serializer):
        donation_id = self.kwargs["pk"]
        donation_obj = get_object_or_404(Donations, id=donation_id) 
-       serializer.save(user=self.request.user, donation_id =  donation_obj)
+       serializer.save(user=self.request.user, donation =  donation_obj)
 
-    """ def post (self, request: Request, pk) -> Response:
-        donation_id = get_object_or_404(Donations, id=pk)
-        serializer = ReservationDetailSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save(donation_id=donation_id, user = request.user)
-
-        return Response(serializer.data)
- """
 class ReservationUserView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
