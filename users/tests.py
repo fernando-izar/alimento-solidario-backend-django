@@ -278,6 +278,19 @@ class UserRegisterViewTest(APITestCase):
         msg = "Verify if the response has the expected keys when trying to login with email"
         self.assertEqual(expected_keys, resulted_keys, msg=msg)
 
+    # Verify if login is not successful with invalid email
+    def test_login_is_not_successful_with_invalid_email(self):
+        user = baker.make(User, type="donor", email="test@mail.com", password="123456")
+        user.set_password(user.password)
+        user.save()
 
+        url = reverse("login")
+        data = {"email": "invalid_email@mail.com", "password": "123456"}
+        response = self.client.post(url, data)
+        expected_status_code = status.HTTP_401_UNAUTHORIZED
+        resulted_status_code = response.status_code
+        msg = "Verify if the status code is 401 when trying to login with invalid email"
+        self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
+        
 
 
