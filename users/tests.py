@@ -305,7 +305,6 @@ class UserRegisterViewTest(APITestCase):
         resulted_status_code = response.status_code
         msg = "Verify if the status code is 401 when trying to login with invalid password"
         self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
-
     
     # Verify if login is not successful with invalid email and password
     def test_login_is_not_successful_with_invalid_email_and_password(self):
@@ -320,4 +319,19 @@ class UserRegisterViewTest(APITestCase):
         resulted_status_code = response.status_code 
         msg = "Verify if the status code is 401 when trying to login with invalid email and password"
         self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
+
+    # Verify if user is created with attribute isAct = True
+    def test_user_is_created_with_attribute_isAct_True(self):
+        user = baker.make(User)
+        self.assertTrue(user.isActive)
+
+    # Verify if user is created with attribute isAdm = False
+    def test_user_is_created_with_attribute_isAdm_False(self):
+        user = baker.make(User)
+        self.assertFalse(user.isAdm)
+
+    
+
+
+    
 
