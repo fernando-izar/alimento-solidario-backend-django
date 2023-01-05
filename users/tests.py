@@ -155,7 +155,32 @@ class UserRegisterViewTest(APITestCase):
 
     # Verify if cannot delete another user by id without admin authentication
     def test_cannot_delete_another_user_by_id_without_admin_authentication(self):
-        ...
+        normal_user = baker.make(User, isAdm=False, password="123456", email="test@mail.com", type="donor")
+        normal_user.set_password(normal_user.password)
+        normal_user.save()
+
+        url = reverse("login")
+        data = {"email": "test@mail.com", "password": "123456"}
+        response = self.client.post(url, data)
+        normal_user_token = response.data["token"]
+
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {normal_user_token}")
+
+        admin_user = baker.make(User, isAdm=True)
+        admin_user.set_password(admin_user.password)
+        admin_user.save()
+        url = f"{self.BASE_URL}{admin_user.id}/"
+        response = self.client.delete(url)
+
+        expected_status_code = status.HTTP_403_FORBIDDEN
+        resulted_status_code = response.status_code
+        msg = "Verify if the status code is 403 when trying to delete another user without admin authentication"
+        self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
+
+        expected_response = {"detail": "You do not have permission to perform this action."}
+        resulted_response = response.data
+        msg = "Verify if the response is the expected when trying to delete another user without admin authentication"
+        self.assertEqual(expected_response, resulted_response, msg=msg)
 
     # Verify if cannot update user by id without authentication
     def test_cannot_update_user_by_id_without_authentication(self):
