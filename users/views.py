@@ -32,6 +32,12 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     lookup_field = "pk"
 
+    def update(self, request, *args, **kwargs):
+        user = self.get_object()
+        if not user.isActive:
+            return Response({"error": "User already deleted"}, status=status.HTTP_400_BAD_REQUEST)
+        return super().update(request, *args, **kwargs)
+
       
 class UserProfileView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
