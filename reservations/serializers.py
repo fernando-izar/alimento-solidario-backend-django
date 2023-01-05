@@ -15,10 +15,8 @@ class ReservationSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only = True)
     donation_id= serializers.UUIDField(
         required=True, validators=[UniqueValidator(queryset=Reservations.objects.all())])
-
     donation= DonationSerializer(read_only = True)
-    """ classification = serializers.SerializerMethodField() """
-
+   
     class Meta:
         model = Reservations
         fields = ["id","date","donation_id", "user","donation"]
@@ -26,11 +24,6 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     def get_donation(self, obj: Reservations):
         return model_to_dict(obj.donation)
-
-    """ def get_classification(self, obj: Reservations):
-        return model_to_dict(obj.donation.classification) """
-
-
 
 class ReservationDetailSerializer(serializers.ModelSerializer):
      
@@ -41,14 +34,26 @@ class ReservationDetailSerializer(serializers.ModelSerializer):
         model = Reservations
         fields = ["id", "date", "user", "donation_id", "donation"]
         depth = 2
-
         read_only_fields = ["donation_id"]
 
-    """   def create(self,validated_data):
+    def create(self,validated_data):
         reservation = Reservations.objects.create(**validated_data)
         return reservation
-    """
-        
+   
+class ReservationDetailCreateSerializer(serializers.ModelSerializer):
+  
+    user = UserSerializer(read_only = True)
+    donation_id= serializers.UUIDField(
+        required=True, validators=[UniqueValidator(queryset=Reservations.objects.all())])
+    donation= DonationSerializer(read_only = True)
+   
+    class Meta:
+        model = Reservations
+        fields = ["id","date","donation_id", "user","donation"]
+        depth = 2
+
+    def get_donation(self, obj: Reservations):
+        return model_to_dict(obj.donation)        
 
     ...
         
