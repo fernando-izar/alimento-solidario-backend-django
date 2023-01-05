@@ -32,13 +32,7 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     lookup_field = "pk"
 
-    # def get(self, request, pk):
-    #     user = get_object_or_404(User, pk=pk)
-    #     self.check_object_permissions(request, user)
-    #     serializer = UserSerializer(user)
-    #     return Response(serializer.data)
-
-    
+      
 class UserProfileView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -60,6 +54,8 @@ class UserSoftDeleteView(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         user = self.get_object()
+        if not user.isActive:
+            return Response({"error": "User already deleted"}, status=status.HTTP_400_BAD_REQUEST)
         user.isActive = False
         user.save()
         serializer = self.get_serializer(user)
