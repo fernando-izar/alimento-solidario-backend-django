@@ -10,5 +10,4 @@ class IsAdm(permissions.BasePermission):
 
 class IsOwnerOrAdm(permissions.BasePermission):
     def has_permission(self, request, view: View) -> bool:
-        print((str(view.kwargs["pk"])) == (str(request.user.id)))
         return str(view.kwargs["pk"]) == str(request.user.id) or request.user.isAdm
