@@ -327,20 +327,10 @@ class ClassificationsViewsTest(APITestCase):
         self.assertEqual(expected_status, resulted_status, msg=message2)
     
     def test_delete_without_authentication(self):
-        data_login = {"email": self.user_adm.email, "password": "123456"}
-        url_login = reverse("login")
-        response_login = self.client.post(url_login, data_login)
-        user_token = response_login.data["token"]
-        headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
-
-        url_classifications = reverse("classifications")
-        data_classfication = { "name": "Test1" }
-        response_create = self.client.post(url_classifications, data_classfication, **headers)
-
-        url_classifications_id = f"/api/classifications/{response_create.data['id']}/"
+        url_classifications_id = f"/api/classifications/b686fd89-ff05-4025-be22-bb83d1111d83/"
         headers_invalid = {"HTTP_AUTHORIZATION": f"Bearer {'token_invalid'}"}
 
-        response_invalid = self.client.delete(url_classifications_id, {"name": "Test_Invalid"}, **headers_invalid)
+        response_invalid = self.client.delete(url_classifications_id, **headers_invalid)
 
         expected_response1 = {"detail": "Given token not valid for any token type","code": "token_not_valid","messages": [{"token_class": "AccessToken","token_type": "access","message": "Token is invalid or expired"}]}
         resulted_response1 = response_invalid.data
@@ -373,8 +363,7 @@ class ClassificationsViewsTest(APITestCase):
         headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
 
         url_classifications_id = f"/api/classifications/b686fd89-ff05-4025-be22-bb83d1111d83/"
-        data_classfication = { "name": "Test1" }
-        response = self.client.delete(url_classifications_id, data_classfication, **headers)
+        response = self.client.delete(url_classifications_id, **headers)
 
         expected_response = {"detail": "You do not have permission to perform this action."}
         resulted_response = response.data
@@ -385,3 +374,45 @@ class ClassificationsViewsTest(APITestCase):
         resulted_status = response.status_code
         message2 = "Verify if the status is equal to 403 Forbidden"
         self.assertEqual(expected_status, resulted_status, msg=message2)
+    
+    def test_delete_by_invalid_id(self):
+        data_login = {"email": self.user_adm.email, "password": "123456"}
+        url_login = reverse("login")
+        response_login = self.client.post(url_login, data_login)
+        user_token = response_login.data["token"]
+        headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
+
+        url_classifications_id = f"/api/classifications/b686fd89-ff05-4025-be22-bb83d1111d83/"
+        response = self.client.delete(url_classifications_id, **headers)
+
+        expected_response = {"detail": "Not found."}
+        resulted_response = response.data
+        message1 = "Verify id not found"
+        self.assertEqual(expected_response, resulted_response, msg=message1)
+
+        expected_status = status.HTTP_404_NOT_FOUND
+        resulted_status = response.status_code
+        message2 = "Verify if the status is equal to 404 Not Found"
+        self.assertEqual(expected_status, resulted_status, msg=message2)
+    
+    def test_patch_by_invalid_id(self):
+        data_login = {"email": self.user_adm.email, "password": "123456"}
+        url_login = reverse("login")
+        response_login = self.client.post(url_login, data_login)
+        user_token = response_login.data["token"]
+        headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
+
+        url_classifications_id = f"/api/classifications/b686fd89-ff05-4025-be22-bb83d1111d83/"
+        response = self.client.patch(url_classifications_id, **headers)
+
+        expected_response = {"detail": "Not found."}
+        resulted_response = response.data
+        message1 = "Verify id not found"
+        self.assertEqual(expected_response, resulted_response, msg=message1)
+
+        expected_status = status.HTTP_404_NOT_FOUND
+        resulted_status = response.status_code
+        message2 = "Verify if the status is equal to 404 Not Found"
+        self.assertEqual(expected_status, resulted_status, msg=message2)
+
+        ipdb.set_trace()
