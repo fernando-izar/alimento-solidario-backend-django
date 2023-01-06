@@ -23,9 +23,9 @@ class CustomTokenObtainPairView(jwt_views.TokenObtainPairView):
 
 
 urlpatterns = [
-    path("login/", CustomTokenObtainPairView.as_view(), name='login'),
+    path("login/", CustomTokenObtainPairView.as_view(), name="login"),
     path("users/profile/", views.UserProfileView.as_view()),
-    path("users/", views.UserView.as_view()),
-    path("users/<str:pk>/", views.UserDetailView.as_view()),
     path("users/soft/<str:pk>/", views.UserSoftDeleteView.as_view()),
+    path("users/<str:pk>/", views.UserDetailView.as_view()),
+    path("users/", views.UserView.as_view(), name="users"),
 ]

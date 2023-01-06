@@ -3,6 +3,7 @@ from users.models import User
 from rest_framework.views import View
 from datetime import datetime
 import ipdb
+from rest_framework.exceptions import PermissionDenied
 
 
 class IsAccountOwner(permissions.BasePermission):
@@ -13,10 +14,4 @@ class IsDonor(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method == 'POST':
             return request.user.type == "donor"
-
-class ValidatedExpiration(permissions.BasePermission):
-    def has_permission(self, request, view):
-        nowDate = datetime.now()
-        dateFormat = f'{nowDate.year}-{nowDate.month}-{nowDate.day}'
-        ipdb.set_trace()
-        return request.data.expiration >= dateFormat
+        return True

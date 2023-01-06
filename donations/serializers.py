@@ -2,9 +2,11 @@ from rest_framework import serializers
 from .models import Donations
 from users.models import User
 from users.serializers import UserSerializer
+from classifications.serializers import ClassificationSerializer
 
 class DonationSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
+    classification = serializers.CharField()
     class Meta:
         model = Donations
         fields = [
@@ -17,23 +19,24 @@ class DonationSerializer(serializers.ModelSerializer):
         "updatedAt",
         "classification",
         "user",
-        ]        
+        ]             
         depth=1
-
         
 
 class DonationDetailSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Donations
         fields = [
-        "id", 
-        "food", 
-        "quantity", 
-        "expiration", 
-        "available", 
+        "id",
+        "food",
+        "quantity",
+        "expiration",
+        "available",
         "createdAt",
         "updatedAt",
         "classification",
+        "user",
         ]
         depth=1
 
