@@ -414,5 +414,3 @@ class ClassificationsViewsTest(APITestCase):
         resulted_status = response.status_code
         message2 = "Verify if the status is equal to 404 Not Found"
         self.assertEqual(expected_status, resulted_status, msg=message2)
-
-        ipdb.set_trace()
