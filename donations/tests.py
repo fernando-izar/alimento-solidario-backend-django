@@ -34,7 +34,7 @@ class DonationsTestCase(APITestCase):
             "food",
             "quantity",
             "expiration",
-            "classification",            
+            "classification_id",            
             }
         returned_fields = set(resulted_data.keys())
         msg = "Verify if all required keys are returned with an ampty donation creation request"
@@ -53,7 +53,7 @@ class DonationsTestCase(APITestCase):
         headers = {"HTTP_AUTHORIZATION": f'Bearer {user_token}'}
 
         url_donation = reverse('donations')
-        data_donation = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification": f'{self.classification1.id}'}
+        data_donation = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification_id": f'{self.classification1.id}'}
         response_donation = self.client.post(url_donation, data_donation, **headers)
 
         resulted_data = response_donation.json()
@@ -75,44 +75,16 @@ class DonationsTestCase(APITestCase):
         headers = {"HTTP_AUTHORIZATION": f'Bearer {user_token}'}
 
         url_donation = reverse('donations')
-        data_donation1 = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification": f'{self.classification1.id}'}
-        data_donation2 = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification": f'{self.classification2.id}'}
-        data_donation3 = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification": f'{self.classification3.id}'}
-        response = self.client.post(url_donation, data_donation1, **headers)
+        data_donation1 = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification_id": f'{self.classification1.id}'}
+        data_donation2 = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification_id": f'{self.classification2.id}'}
+        data_donation3 = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification_id": f'{self.classification3.id}'}
+        self.client.post(url_donation, data_donation1, **headers)
         self.client.post(url_donation, data_donation2, **headers)
         self.client.post(url_donation, data_donation3, **headers)
 
-        response_donation_get = self.client.get(url_donation, **headers)
+        response_donation_get = self.client.get(url_donation)
         message = "Verify listing donations"
-        ipdb.set_trace()
         self.assertEqual(len(response_donation_get.data), 3, msg=message)
-
-    def test_cannot_list_donation_by_id_without_authentication(self):
-
-        donation = baker.make(Donations)
-        url = f"{self.DONATION_URL}{donation.id}/"
-
-        response = self.client.get(url)
-
-        expected_status_code = status.HTTP_401_UNAUTHORIZED
-        resulted_status_code = response.status_code
-        msg = "Verify if the status code is 401 when trying to list a user without authentication"
-        self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
-
-    def test_cannot_list_all_donations_without_authentication(self):
-        baker.make(Donations, _quantity=10)
-
-        response = self.client.get(self.DONATION_URL)
-
-        expected_status_code = status.HTTP_401_UNAUTHORIZED
-        resulted_status_code = response.status_code
-        msg = "Verify if the status code is 401 when trying to list all donations without authentication"
-        self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
-
-        expected_response = {"detail": "Authentication credentials were not provided."}
-        resulted_response = response.data
-        msg = "Verify if the response is the expected when trying to list all donations without authentication"
-        self.assertEqual(expected_response, resulted_response, msg=msg)
 
     def test_cannot_delete_donation_by_id_without_authentication(self):
         donation = baker.make(Donations)

@@ -6,6 +6,3 @@ urlpatterns = [
     path("donations/", views.DonationView.as_view(), name='donations'),
     path("donations/<pk>/", views.DonationDetailView.as_view()),
 ]
-
-""" path("donations/expand/", views.DonationExpandView.as_view())
-path("donations/expand/<pk>/", views.DonationExpandDetailView.as_view()) """
