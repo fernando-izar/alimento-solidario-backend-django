@@ -5,6 +5,11 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Donations
 from .serializers import *
 from classifications.models import Classification
+import json
+
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import JsonResponse
 
 
 class DonationView(generics.ListCreateAPIView):
@@ -18,9 +23,26 @@ class DonationView(generics.ListCreateAPIView):
         return Donations.objects.all()
 
     def perform_create(self, serializer):
-        classification_id = self.request.data['classification']
+        classification_id = self.request.data["classification"]
         classification = Classification.objects.get(pk=classification_id)
         serializer.save(user=self.request.user, classification=classification)
+
+        send_mail(
+            subject="Aviso de cadastro de doação",
+            message="Obrigado "
+            + f"{self.request.user.responsible} "
+            + "pela sua doação de "
+            + f"{self.request.data['quantity']} "
+            + "de "
+            + f"{self.request.data['food']}"
+            + ".",
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[
+                self.request.user.email,
+                "alex_wfarias@yahoo.com.br",
+            ],
+            fail_silently=False,
+        )
 
 
 class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -29,6 +51,7 @@ class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = DonationDetailSerializer
     queryset = Donations.objects.all()
+
 
 class DonationUserView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]
