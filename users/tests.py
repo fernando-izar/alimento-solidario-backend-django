@@ -273,7 +273,7 @@ class UserRegisterViewTest(APITestCase):
             msg = "Verify if the status code is 200 when trying to login with email"
             self.assertEqual(expected_status_code, resulted_status_code, msg=msg)
 
-        expected_keys = {"token"}
+        expected_keys = {"token", "user"}
         resulted_keys = set(response.json().keys())
         msg = "Verify if the response has the expected keys when trying to login with email"
         self.assertEqual(expected_keys, resulted_keys, msg=msg)
