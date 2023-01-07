@@ -8,7 +8,8 @@ WORKDIR /app_django
 
 COPY . /app_django
 
-RUN apt-get update && apt-get install x11-xserver-utils -y
+RUN apt-get update
+RUN apt-get install -y x11-xserver-utils
 
 RUN pip install -U pip
 RUN pip install -r requirements.txt
