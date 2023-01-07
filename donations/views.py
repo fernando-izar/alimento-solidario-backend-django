@@ -39,7 +39,6 @@ class DonationView(generics.ListCreateAPIView):
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[
                 self.request.user.email,
-                "alex_wfarias@yahoo.com.br",
             ],
             fail_silently=False,
         )
