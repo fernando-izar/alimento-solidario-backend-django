@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "ec2-54-233-120-17.sa-east-1.compute.amazonaws.com",
+    "ec2-18-228-152-153.sa-east-1.compute.amazonaws.com",
     "localhost",
     "http://localhost:3000",
 ]
