@@ -9,5 +9,5 @@ class IsAdm(permissions.BasePermission):
 
 
 class IsOwnerOrAdm(permissions.BasePermission):
-    def has_object_permission(self, request, view: View, obj: User) -> bool:
-        return obj == request.user or request.user.isAdm
+    def has_permission(self, request, view: View) -> bool:
+        return str(view.kwargs["pk"]) == str(request.user.id) or request.user.isAdm

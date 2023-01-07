@@ -31,6 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "ec2-54-232-73-207.sa-east-1.compute.amazonaws.com",
     "localhost",
+    "http://localhost:3000",
 ]
 
 
@@ -49,6 +50,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "drf_spectacular",
+    "corsheaders",
 ]
 
 MY_APPS = [
@@ -70,6 +72,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "alimento_solidario.urls"
@@ -170,3 +174,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 ALLOWED_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = ALLOWED_METHODS
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000']
