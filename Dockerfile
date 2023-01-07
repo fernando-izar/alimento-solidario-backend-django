@@ -10,3 +10,6 @@ COPY . /app_django
 
 RUN pip install -U pip
 RUN pip install -r requirements.txt
+# RUN xauth add $(xauth -f /app_django/.Xauthority list|tail -1)
+RUN /usr/bin/xhost +
+RUN touch ~/.Xauthority

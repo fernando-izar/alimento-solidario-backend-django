@@ -9,6 +9,8 @@ from .models import User
 from .serializers import UserSerializer
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+import pywhatkit
+import datetime
 
 
 class UserView(generics.ListCreateAPIView):
@@ -21,6 +23,16 @@ class UserView(generics.ListCreateAPIView):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+
+        current_time = datetime.datetime.now()
+        # pywhatkit.sendwhatmsg(phone_no=self.request.POST["contact"], message="Bem vindo ao Alimento Solidário! Seu cadatro foi realizado com sucesso!")
+        pywhatkit.sendwhatmsg(phone_no="+5517981026092", message="Bem vindo ao Alimento Solidário! Seu cadatro foi realizado com sucesso!", time_hour=current_time.hour, time_min=current_time.minute)
+        pywhatkit.sendwhatmsg(phone_no="+5517981026092", message="Bem vindo ao Alimento Solidário! Seu cadatro foi realizado com sucesso!", time_hour=17, time_min=15)
+
+
+        return super().perform_create(serializer)
 
 
 class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
