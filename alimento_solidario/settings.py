@@ -33,6 +33,11 @@ ALLOWED_HOSTS = [
     "ec2-18-228-152-153.sa-east-1.compute.amazonaws.com",
     "localhost",
     "http://localhost:3000",
+    "https://alimento-solidario-frontend.vercel.app/",
+    "https://alimento-solidario-frontend.vercel.app",
+    "http://alimento-solidario-frontend.vercel.app/",
+    "http://alimento-solidario-frontend.vercel.app",
+    "alimento-solidario-frontend.vercel.app",
 ]
 
 
