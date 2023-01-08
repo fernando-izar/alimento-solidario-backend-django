@@ -143,6 +143,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Alimento Solidário API",
     "DESCRIPTION": "API para um WEBService de doação de alimentos.",
     "VERSION": "2.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 REST_FRAMEWORK = {
@@ -173,10 +174,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-ALLOWED_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+ALLOWED_METHODS = ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_METHODS = ALLOWED_METHODS
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000']
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8000"]

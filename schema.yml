@@ -6,715 +6,862 @@ info:
 paths:
   /api/classifications/:
     get:
-      operationId: classifications_list
+      operationId: api_classifications_list
       tags:
-      - classifications
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Classification'
-          description: ''
+                  $ref: "#/components/schemas/Classification"
+          description: ""
     post:
-      operationId: classifications_create
+      operationId: api_classifications_create
       tags:
-      - classifications
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Classification'
+              $ref: "#/components/schemas/Classification"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Classification'
+              $ref: "#/components/schemas/Classification"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Classification'
+              $ref: "#/components/schemas/Classification"
         required: true
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Classification'
-          description: ''
+                $ref: "#/components/schemas/Classification"
+          description: ""
   /api/classifications/{id}/:
     get:
-      operationId: classifications_retrieve
+      operationId: api_classifications_retrieve
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - classifications
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Classification'
-          description: ''
-    put:
-      operationId: classifications_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - classifications
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Classification'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Classification'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Classification'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Classification'
-          description: ''
+                $ref: "#/components/schemas/Classification"
+          description: ""
+    # put:
+    #   operationId: api_classifications_update
+    #   parameters:
+    #   - in: path
+    #     name: id
+    #     schema:
+    #       type: string
+    #     required: true
+    #   tags:
+    #   - api
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/Classification'
+    #       application/x-www-form-urlencoded:
+    #         schema:
+    #           $ref: '#/components/schemas/Classification'
+    #       multipart/form-data:
+    #         schema:
+    #           $ref: '#/components/schemas/Classification'
+    #     required: true
+    #   security:
+    #   - jwtAuth: []
+    #   responses:
+    #     '200':
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/components/schemas/Classification'
+    #       description: ''
     patch:
-      operationId: classifications_partial_update
+      operationId: api_classifications_partial_update
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - classifications
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedClassification'
+              $ref: "#/components/schemas/PatchedClassification"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedClassification'
+              $ref: "#/components/schemas/PatchedClassification"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedClassification'
+              $ref: "#/components/schemas/PatchedClassification"
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Classification'
-          description: ''
+                $ref: "#/components/schemas/Classification"
+          description: ""
     delete:
-      operationId: classifications_destroy
+      operationId: api_classifications_destroy
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - classifications
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '204':
+        "204":
           description: No response body
   /api/classifications/name/{name}/:
     get:
-      operationId: classifications_name_retrieve
+      operationId: api_classifications_name_retrieve
       parameters:
-      - in: path
-        name: name
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
       tags:
-      - classifications
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Classification'
-          description: ''
+                $ref: "#/components/schemas/Classification"
+          description: ""
   /api/donations/:
     get:
-      operationId: donations_list
+      operationId: api_donations_list
       tags:
-      - donations
+        - api
       security:
-      - jwtAuth: []
-      - {}
+        - jwtAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Donation'
-          description: ''
+                  $ref: "#/components/schemas/Donation"
+          description: ""
     post:
-      operationId: donations_create
+      operationId: api_donations_create
       tags:
-      - donations
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Donation'
+              $ref: "#/components/schemas/Donation"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Donation'
+              $ref: "#/components/schemas/Donation"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/Donation'
+              $ref: "#/components/schemas/Donation"
         required: true
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Donation'
-          description: ''
+                $ref: "#/components/schemas/Donation"
+          description: ""
   /api/donations/{id}/:
     get:
-      operationId: donations_retrieve
+      operationId: api_donations_retrieve
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this donations.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this donations.
+          required: true
       tags:
-      - donations
+        - api
       security:
-      - jwtAuth: []
-      - {}
+        - jwtAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DonationDetail'
-          description: ''
-    put:
-      operationId: donations_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this donations.
-        required: true
-      tags:
-      - donations
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DonationDetail'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/DonationDetail'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/DonationDetail'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DonationDetail'
-          description: ''
+                $ref: "#/components/schemas/DonationDetail"
+          description: ""
+    # put:
+    #   operationId: api_donations_update
+    #   parameters:
+    #   - in: path
+    #     name: id
+    #     schema:
+    #       type: string
+    #       format: uuid
+    #     description: A UUID string identifying this donations.
+    #     required: true
+    #   tags:
+    #   - api
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/DonationDetail'
+    #       application/x-www-form-urlencoded:
+    #         schema:
+    #           $ref: '#/components/schemas/DonationDetail'
+    #       multipart/form-data:
+    #         schema:
+    #           $ref: '#/components/schemas/DonationDetail'
+    #     required: true
+    #   security:
+    #   - jwtAuth: []
+    #   responses:
+    #     '200':
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/components/schemas/DonationDetail'
+    #       description: ''
     patch:
-      operationId: donations_partial_update
+      operationId: api_donations_partial_update
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this donations.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this donations.
+          required: true
       tags:
-      - donations
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedDonationDetail'
+              $ref: "#/components/schemas/PatchedDonationDetail"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedDonationDetail'
+              $ref: "#/components/schemas/PatchedDonationDetail"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedDonationDetail'
+              $ref: "#/components/schemas/PatchedDonationDetail"
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DonationDetail'
-          description: ''
+                $ref: "#/components/schemas/DonationDetail"
+          description: ""
     delete:
-      operationId: donations_destroy
+      operationId: api_donations_destroy
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this donations.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this donations.
+          required: true
       tags:
-      - donations
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '204':
+        "204":
           description: No response body
   /api/donations/expand/:
     get:
-      operationId: donations_expand_list
+      operationId: api_donations_expand_list
       tags:
-      - donations
+        - api
       security:
-      - jwtAuth: []
-      - {}
+        - jwtAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Donation'
-          description: ''
+                  $ref: "#/components/schemas/Donation"
+          description: ""
   /api/donations/expand/{id}/:
     get:
-      operationId: donations_expand_retrieve
+      operationId: api_donations_expand_retrieve
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-          format: uuid
-        description: A UUID string identifying this donations.
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this donations.
+          required: true
       tags:
-      - donations
+        - api
       security:
-      - jwtAuth: []
-      - {}
+        - jwtAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DonationExpandDetail'
-          description: ''
+                $ref: "#/components/schemas/DonationExpandDetail"
+          description: ""
   /api/donations/user/:
     get:
-      operationId: donations_user_list
+      operationId: api_donations_user_list
       tags:
-      - donations
+        - api
       security:
-      - jwtAuth: []
-      - {}
+        - jwtAuth: []
+        - {}
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DonationUser'
-          description: ''
+                  $ref: "#/components/schemas/DonationUser"
+          description: ""
   /api/login/:
     post:
-      operationId: login_create
+      operationId: api_login_create
       description: |-
         Takes a set of user credentials and returns an access and refresh JSON web
         token pair to prove the authentication of those credentials.
       tags:
-      - login
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomTokenObtainPair'
+              $ref: "#/components/schemas/CustomTokenObtainPair"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CustomTokenObtainPair'
+              $ref: "#/components/schemas/CustomTokenObtainPair"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CustomTokenObtainPair'
+              $ref: "#/components/schemas/CustomTokenObtainPair"
         required: true
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomTokenObtainPair'
-          description: ''
+                $ref: "#/components/schemas/CustomTokenObtainPair"
+          description: ""
   /api/reservations/:
     get:
-      operationId: reservations_retrieve
+      operationId: api_reservations_list
       tags:
-      - reservations
+        - api
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - jwtAuth: []
+        - {}
       responses:
-        '200':
-          description: No response body
-    post:
-      operationId: reservations_create
-      tags:
-      - reservations
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '201':
-          description: No response body
-  /api/reservations/{id}/:
-    get:
-      operationId: reservations_retrieve_2
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - reservations
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          description: No response body
-    put:
-      operationId: reservations_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - reservations
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          description: No response body
-    patch:
-      operationId: reservations_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - reservations
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          description: No response body
-    delete:
-      operationId: reservations_destroy
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - reservations
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '204':
-          description: No response body
-  /api/reservations/user/:
-    get:
-      operationId: reservations_user_retrieve
-      tags:
-      - reservations
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
-          description: No response body
-  /api/users/:
-    get:
-      operationId: users_list
-      tags:
-      - users
-      security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
-      responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-          description: ''
+                  $ref: "#/components/schemas/Reservation"
+          description: ""
     post:
-      operationId: users_create
+      operationId: api_reservations_create
       tags:
-      - users
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/Reservation"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/Reservation"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: "#/components/schemas/Reservation"
         required: true
       security:
-      - cookieAuth: []
-      - basicAuth: []
-      - {}
+        - jwtAuth: []
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/Reservation"
+          description: ""
+  /api/reservations/{id}/:
+    delete:
+      operationId: api_reservations_destroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      tags:
+        - api
+      security:
+        - jwtAuth: []
+      responses:
+        "204":
+          description: No response body
+  /api/reservations/donations/{id}/:
+    post:
+      operationId: api_reservations_donations_create
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: A UUID string identifying this reservations.
+          required: true
+      tags:
+        - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReservationDetailCreate"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/ReservationDetailCreate"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/ReservationDetailCreate"
+      security:
+        - jwtAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReservationDetailCreate"
+          description: ""
+  /api/reservations/user/:
+    get:
+      operationId: api_reservations_user_list
+      tags:
+        - api
+      security:
+        - jwtAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reservation"
+          description: ""
+  /api/users/:
+    get:
+      operationId: api_users_list
+      tags:
+        - api
+      security:
+        - cookieAuth: []
+        - basicAuth: []
+        - {}
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+          description: ""
+    post:
+      operationId: api_users_create
+      tags:
+        - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/User"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      security:
+        - cookieAuth: []
+        - basicAuth: []
+        - {}
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+          description: ""
   /api/users/{id}/:
     get:
-      operationId: users_retrieve
+      operationId: api_users_retrieve
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - users
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
-    put:
-      operationId: users_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/User'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
+    # put:
+    #   operationId: api_users_update
+    #   parameters:
+    #   - in: path
+    #     name: id
+    #     schema:
+    #       type: string
+    #     required: true
+    #   tags:
+    #   - api
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/User'
+    #       application/x-www-form-urlencoded:
+    #         schema:
+    #           $ref: '#/components/schemas/User'
+    #       multipart/form-data:
+    #         schema:
+    #           $ref: '#/components/schemas/User'
+    #     required: true
+    #   security:
+    #   - jwtAuth: []
+    #   responses:
+    #     '200':
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/components/schemas/User'
+    #       description: ''
     patch:
-      operationId: users_partial_update
+      operationId: api_users_partial_update
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - users
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
     delete:
-      operationId: users_destroy
+      operationId: api_users_destroy
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - users
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '204':
+        "204":
           description: No response body
   /api/users/profile/:
     get:
-      operationId: users_profile_list
+      operationId: api_users_profile_list
       tags:
-      - users
+        - api
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
-          description: ''
+                  $ref: "#/components/schemas/User"
+          description: ""
   /api/users/soft/{id}/:
-    put:
-      operationId: users_soft_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - users
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/User'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/User'
-        required: true
-      security:
-      - jwtAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+    # put:
+    #   operationId: api_users_soft_update
+    #   parameters:
+    #   - in: path
+    #     name: id
+    #     schema:
+    #       type: string
+    #     required: true
+    #   tags:
+    #   - api
+    #   requestBody:
+    #     content:
+    #       application/json:
+    #         schema:
+    #           $ref: '#/components/schemas/User'
+    #       application/x-www-form-urlencoded:
+    #         schema:
+    #           $ref: '#/components/schemas/User'
+    #       multipart/form-data:
+    #         schema:
+    #           $ref: '#/components/schemas/User'
+    #     required: true
+    #   security:
+    #   - jwtAuth: []
+    #   responses:
+    #     '200':
+    #       content:
+    #         application/json:
+    #           schema:
+    #             $ref: '#/components/schemas/User'
+    #       description: ''
     patch:
-      operationId: users_soft_partial_update
+      operationId: api_users_soft_partial_update
       parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       tags:
-      - users
+        - api
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/PatchedUser'
+              $ref: "#/components/schemas/PatchedUser"
       security:
-      - jwtAuth: []
+        - jwtAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-          description: ''
+                $ref: "#/components/schemas/User"
+          description: ""
+  /schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum:
+              - json
+              - yaml
+        - in: query
+          name: lang
+          schema:
+            type: string
+            enum:
+              - af
+              - ar
+              - ar-dz
+              - ast
+              - az
+              - be
+              - bg
+              - bn
+              - br
+              - bs
+              - ca
+              - cs
+              - cy
+              - da
+              - de
+              - dsb
+              - el
+              - en
+              - en-au
+              - en-gb
+              - eo
+              - es
+              - es-ar
+              - es-co
+              - es-mx
+              - es-ni
+              - es-ve
+              - et
+              - eu
+              - fa
+              - fi
+              - fr
+              - fy
+              - ga
+              - gd
+              - gl
+              - he
+              - hi
+              - hr
+              - hsb
+              - hu
+              - hy
+              - ia
+              - id
+              - ig
+              - io
+              - is
+              - it
+              - ja
+              - ka
+              - kab
+              - kk
+              - km
+              - kn
+              - ko
+              - ky
+              - lb
+              - lt
+              - lv
+              - mk
+              - ml
+              - mn
+              - mr
+              - ms
+              - my
+              - nb
+              - ne
+              - nl
+              - nn
+              - os
+              - pa
+              - pl
+              - pt
+              - pt-br
+              - ro
+              - ru
+              - sk
+              - sl
+              - sq
+              - sr
+              - sr-latn
+              - sv
+              - sw
+              - ta
+              - te
+              - tg
+              - th
+              - tk
+              - tr
+              - tt
+              - udm
+              - uk
+              - ur
+              - uz
+              - vi
+              - zh-hans
+              - zh-hant
+      tags:
+        - schema
+      security:
+        - cookieAuth: []
+        - basicAuth: []
+        - {}
+      responses:
+        "200":
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ""
 components:
   schemas:
     Address:
@@ -735,12 +882,12 @@ components:
         zipCode:
           type: string
       required:
-      - address
-      - city
-      - complement
-      - id
-      - state
-      - zipCode
+        - address
+        - city
+        - complement
+        - id
+        - state
+        - zipCode
     Classification:
       type: object
       properties:
@@ -751,8 +898,8 @@ components:
         name:
           type: string
       required:
-      - id
-      - name
+        - id
+        - name
     CustomTokenObtainPair:
       type: object
       properties:
@@ -762,8 +909,8 @@ components:
           type: string
           writeOnly: true
       required:
-      - email
-      - password
+        - email
+        - password
     Donation:
       type: object
       properties:
@@ -792,21 +939,21 @@ components:
           readOnly: true
         classification:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+            - $ref: "#/components/schemas/Nested"
           readOnly: true
         user:
           allOf:
-          - $ref: '#/components/schemas/User'
+            - $ref: "#/components/schemas/User"
           readOnly: true
       required:
-      - classification
-      - createdAt
-      - expiration
-      - food
-      - id
-      - quantity
-      - updatedAt
-      - user
+        - classification
+        - createdAt
+        - expiration
+        - food
+        - id
+        - quantity
+        - updatedAt
+        - user
     DonationDetail:
       type: object
       properties:
@@ -835,16 +982,16 @@ components:
           readOnly: true
         classification:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+            - $ref: "#/components/schemas/Nested"
           readOnly: true
       required:
-      - classification
-      - createdAt
-      - expiration
-      - food
-      - id
-      - quantity
-      - updatedAt
+        - classification
+        - createdAt
+        - expiration
+        - food
+        - id
+        - quantity
+        - updatedAt
     DonationExpandDetail:
       type: object
       properties:
@@ -872,20 +1019,20 @@ components:
           format: date-time
           readOnly: true
         user:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
         classification:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+            - $ref: "#/components/schemas/Nested"
           readOnly: true
       required:
-      - classification
-      - createdAt
-      - expiration
-      - food
-      - id
-      - quantity
-      - updatedAt
-      - user
+        - classification
+        - createdAt
+        - expiration
+        - food
+        - id
+        - quantity
+        - updatedAt
+        - user
     DonationUser:
       type: object
       properties:
@@ -907,7 +1054,7 @@ components:
           type: string
           maxLength: 50
         type:
-          $ref: '#/components/schemas/TypeEnum'
+          $ref: "#/components/schemas/TypeEnum"
         isAdm:
           type: boolean
         isActive:
@@ -915,19 +1062,19 @@ components:
         donations:
           type: array
           items:
-            $ref: '#/components/schemas/Donation'
+            $ref: "#/components/schemas/Donation"
         address:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+            - $ref: "#/components/schemas/Nested"
           readOnly: true
       required:
-      - address
-      - contact
-      - donations
-      - email
-      - id
-      - name
-      - responsible
+        - address
+        - contact
+        - donations
+        - email
+        - id
+        - name
+        - responsible
     Nested:
       type: object
       properties:
@@ -939,8 +1086,8 @@ components:
           type: string
           maxLength: 100
       required:
-      - id
-      - name
+        - id
+        - name
     PatchedClassification:
       type: object
       properties:
@@ -978,7 +1125,7 @@ components:
           readOnly: true
         classification:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+            - $ref: "#/components/schemas/Nested"
           readOnly: true
     PatchedUser:
       type: object
@@ -1007,19 +1154,75 @@ components:
           maxLength: 50
         type:
           allOf:
-          - $ref: '#/components/schemas/TypeEnum'
+            - $ref: "#/components/schemas/TypeEnum"
           default: Not Informed
         isAdm:
           type: boolean
         isActive:
           type: boolean
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date
+          readOnly: true
+        donation_id:
+          type: string
+          format: uuid
+        user:
+          allOf:
+            - $ref: "#/components/schemas/User"
+          readOnly: true
+        donation:
+          allOf:
+            - $ref: "#/components/schemas/Donation"
+          readOnly: true
+      required:
+        - date
+        - donation
+        - donation_id
+        - id
+        - user
+    ReservationDetailCreate:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date
+          readOnly: true
+        donation_id:
+          type: string
+          readOnly: true
+        user:
+          allOf:
+            - $ref: "#/components/schemas/User"
+          readOnly: true
+        donation:
+          allOf:
+            - $ref: "#/components/schemas/Nested"
+          readOnly: true
+      required:
+        - date
+        - donation
+        - donation_id
+        - id
+        - user
     TypeEnum:
       enum:
-      - donor
-      - charity
-      - Not Informed
+        - donor
+        - charity
+        - Not Informed
       type: string
     User:
       type: object
@@ -1048,23 +1251,23 @@ components:
           maxLength: 50
         type:
           allOf:
-          - $ref: '#/components/schemas/TypeEnum'
+            - $ref: "#/components/schemas/TypeEnum"
           default: Not Informed
         isAdm:
           type: boolean
         isActive:
           type: boolean
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
       required:
-      - address
-      - cnpj_cpf
-      - contact
-      - email
-      - id
-      - name
-      - password
-      - responsible
+        - address
+        - cnpj_cpf
+        - contact
+        - email
+        - id
+        - name
+        - password
+        - responsible
   securitySchemes:
     basicAuth:
       type: http
