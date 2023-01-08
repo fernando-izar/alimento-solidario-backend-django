@@ -9,6 +9,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import dotenv
+
+dotenv.load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,13 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!6pgupcw@js%)2$jjyq-577+in)#y4(au#25v=mz0#^$4)8(*q'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-   
+    "ec2-54-233-120-17.sa-east-1.compute.amazonaws.com",
+    "ec2-18-228-152-153.sa-east-1.compute.amazonaws.com",
+    "localhost",
+    "http://localhost:3000",
 ]
 
 
@@ -95,6 +102,14 @@ WSGI_APPLICATION = "alimento_solidario.wsgi.application"
 
 DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": "db_alimento_solidario",
+        "PORT": "5432",
+    },
+    "old_default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     },
@@ -153,3 +168,5 @@ ALLOWED_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_METHODS = ALLOWED_METHODS
+
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000']
