@@ -11,6 +11,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import dotenv
+import environ
 
 dotenv.load_dotenv()
 
@@ -55,6 +56,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "rest_framework",
+    "drf_spectacular",
     "corsheaders",
 ]
 
@@ -144,6 +146,17 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Alimento Solidário API",
+    "DESCRIPTION": "API para um WEBService de doação de alimentos.",
+    "VERSION": "2.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -168,10 +181,31 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-ALLOWED_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
+ALLOWED_METHODS = ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
+
+env = environ.Env(
+    DEBUG=(
+        bool,
+        False,
+    )
+)
+
+environ.Env.read_env(BASE_DIR / ".env")
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = env("EMAIL_HOST")
+
+EMAIL_PORT = env("EMAIL_PORT")
+
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_METHODS = ALLOWED_METHODS
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000']
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://localhost:8000"]
