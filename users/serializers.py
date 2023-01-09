@@ -10,7 +10,12 @@ class UserSerializer(serializers.ModelSerializer):
         required=True, validators=[UniqueValidator(queryset=User.objects.all())]
     )
     cnpj_cpf = serializers.CharField(
-        required=True, validators=[UniqueValidator(queryset=User.objects.all(), message="This field must be unique.")]
+        required=True,
+        validators=[
+            UniqueValidator(
+                queryset=User.objects.all(), message="This field must be unique."
+            )
+        ],
     )
     type = serializers.ChoiceField(choices=Type.choices, default=Type.DEFAULT)
     address = AddressSerializer()
@@ -31,7 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
             "address",
         )
         extra_kwargs = {"password": {"write_only": True}}
-        methods = ["DELETE", "GET", "POST", "PUT", "PATCH"]
+        methods = ["DELETE", "GET", "POST", "PATCH"]
 
     def create(self, validated_data):
         address_data = validated_data.pop("address")
