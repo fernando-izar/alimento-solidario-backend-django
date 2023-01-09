@@ -82,7 +82,7 @@ class ReservationCreateView(generics.CreateAPIView):
         parameters=[
             ReservationDetailCreateSerializer,
         ],
-        description="Rota para criação de reservas enviando id ela url",
+        description="Rota para criação de reservas enviando id pela url",
         summary="Criação de reservas",
     )
     def post(self, request, *args, **kwargs):
