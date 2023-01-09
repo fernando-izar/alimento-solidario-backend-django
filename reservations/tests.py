@@ -38,11 +38,7 @@ class ReservationCreateViewTest(APITestCase):
         data_donation = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification_id": f'{self.classification.id}'}
         response_donation = self.client.post(url_donation, data_donation, **headers)
         
-        
-
         """ donation = baker.make(Donations,classification=f'{self.classification.id}') """
-        
-       
         url_reservation = reverse("reservation")
         data_reservation = {"donation_id": response_donation.data["id"]}
 
