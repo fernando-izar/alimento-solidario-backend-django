@@ -11,6 +11,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 import dotenv
+import environ
 
 dotenv.load_dotenv()
 
@@ -29,9 +30,15 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "ec2-54-232-73-207.sa-east-1.compute.amazonaws.com",
+    "ec2-54-233-120-17.sa-east-1.compute.amazonaws.com",
+    "ec2-18-228-152-153.sa-east-1.compute.amazonaws.com",
     "localhost",
     "http://localhost:3000",
+    "https://alimento-solidario-frontend.vercel.app/",
+    "https://alimento-solidario-frontend.vercel.app",
+    "http://alimento-solidario-frontend.vercel.app/",
+    "http://alimento-solidario-frontend.vercel.app",
+    "alimento-solidario-frontend.vercel.app",
 ]
 
 
@@ -175,6 +182,27 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "users.User"
 
 ALLOWED_METHODS = ["GET", "POST", "PATCH", "DELETE", "OPTIONS"]
+
+env = environ.Env(
+    DEBUG=(
+        bool,
+        False,
+    )
+)
+
+environ.Env.read_env(BASE_DIR / ".env")
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST = env("EMAIL_HOST")
+
+EMAIL_PORT = env("EMAIL_PORT")
+
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 
 CORS_ORIGIN_ALLOW_ALL = True
 

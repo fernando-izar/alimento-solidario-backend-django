@@ -12,7 +12,9 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     user = UserSerializer(read_only=True)
     donation_id = serializers.UUIDField(
-        required=True, validators=[UniqueValidator(queryset=Reservations.objects.all())]
+        required=True,
+        validators=[UniqueValidator(queryset=Reservations.objects.all())],
+        write_only=True,
     )
     donation = DonationSerializer(read_only=True)
 
@@ -66,5 +68,3 @@ class ReservationDetailCreateSerializer(serializers.ModelSerializer):
 
     def get_donation(self, obj: Reservations):
         return model_to_dict(obj.donation)
-
-    ...
