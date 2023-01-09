@@ -11,6 +11,9 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 import pywhatkit
 import datetime
+import pyautogui
+import time
+import keyboard as k
 
 
 class UserView(generics.ListCreateAPIView):
@@ -30,7 +33,12 @@ class UserView(generics.ListCreateAPIView):
         # pywhatkit.sendwhatmsg(phone_no=self.request.POST["contact"], message="Bem vindo ao Alimento Solidário! Seu cadatro foi realizado com sucesso!")
         # pywhatkit.sendwhatmsg(phone_no="+5517981026092", message="Bem vindo ao Alimento Solidário! Seu cadatro foi realizado com sucesso!", time_hour=current_time.hour, time_min=current_time.minute)
         # pywhatkit.sendwhatmsg(phone_no="+5517981026092", message="Bem vindo ao Alimento Solidário! Seu cadatro foi realizado com sucesso!", time_hour=17, time_min=15)
-        pywhatkit.sendwhatmsg_instantly(phone_no="+5517981026092", message="Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!", wait_time=10)
+        pywhatkit.sendwhatmsg_instantly(phone_no="+5517981026092", message="Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!")
+        time.sleep(2)
+        pyautogui.click()
+        time.sleep(1)
+        pyautogui.press('enter')
+
 
 
         return super().perform_create(serializer)
