@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from donations.models import Donations
 from rest_framework.views import Request, APIView, Response, status
 from reservations.permissions import *
+from donations.serializers import DonationSerializer
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -22,8 +23,16 @@ class ReservationView(generics.ListCreateAPIView):
     serializer_class = ReservationSerializer
 
     def perform_create(self, serializer):
+
         donation_id = self.request.data["donation_id"]
-        donation_obj = get_object_or_404(Donations, id=donation_id)
+        donation_obj = get_object_or_404(Donations, id=donation_id) 
+
+        donation_obj.available = False
+
+        obj = Donations.objects.get(pk=donation_id)
+        obj.available = False
+        obj.save()
+
         serializer.save(user=self.request.user, donation=donation_obj)
 
         send_mail(
@@ -73,6 +82,10 @@ class ReservationView(generics.ListCreateAPIView):
         )
 
 
+
+      
+       
+
 class ReservationDetailView(generics.DestroyAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly, IsCharity]
@@ -94,7 +107,11 @@ class ReservationCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         donation_id = self.kwargs["pk"]
         donation_obj = get_object_or_404(Donations, id=donation_id)
+        donation_obj.available = False
 
+        obj = Donations.objects.get(pk=donation_id)
+        obj.available = False
+        obj.save()
         serializer.save(user=self.request.user, donation=donation_obj)
 
         send_mail(

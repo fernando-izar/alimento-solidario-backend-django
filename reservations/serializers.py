@@ -14,7 +14,7 @@ class ReservationSerializer(serializers.ModelSerializer):
   
     user = UserSerializer(read_only = True)
     donation_id= serializers.UUIDField(
-        required=True, validators=[UniqueValidator(queryset=Reservations.objects.all())])
+        required=True, validators=[UniqueValidator(queryset=Reservations.objects.all())], write_only=True)
     donation= DonationSerializer(read_only = True)
    
     class Meta:
