@@ -15,16 +15,18 @@ class ReservationCreateViewTest(APITestCase):
 
     @classmethod
     def setUpTestData(cls):
+        cls.RESERVATION_URL = "/api/reservation/"
+        cls.LOGIN_URL = "/api/login/"
         cls.user_donor = baker.make(User, type="donor", email="kenzinho1@email.com", password="123456", isAdm=True)
         cls.user_donor.set_password(cls.user_donor.password)
         cls.user_donor.save()
         cls.user_charity = baker.make(User, type="charity", email="kenzinho2@email.com", password="123456", isAdm=True)
-        cls.user_charity .set_password(cls.user_charity .password)
-        cls.user_charity .save()
+        cls.user_charity.set_password(cls.user_charity .password)
+        cls.user_charity.save()
 
         cls.classification = baker.make(Classification, name="Laticínio")
+    
         
-
     def test_create_reservation(self):
         data_login = {"email": self.user_charity.email, "password": "123456"}
         url_login = reverse("login")
@@ -32,15 +34,10 @@ class ReservationCreateViewTest(APITestCase):
         user_token = response_login.data["token"]
         headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
 
-      
-
-        url_donation = reverse('donations')
-        data_donation = {"food": "amoras silvestres", "quantity": "10 caixas", "expiration": "2023-12-12", "classification_id": f'{self.classification.id}'}
-        response_donation = self.client.post(url_donation, data_donation, **headers)
+        donation = baker.make(Donations,classification=f'{self.classification.id}')
         
-        """ donation = baker.make(Donations,classification=f'{self.classification.id}') """
         url_reservation = reverse("reservation")
-        data_reservation = {"donation_id": response_donation.data["id"]}
+        data_reservation = {"donation": donation.id }
 
         response_reservation = self.client.post(url_reservation, data_reservation, **headers)
 
@@ -56,7 +53,7 @@ class ReservationCreateViewTest(APITestCase):
         message2 = "Verify if the classification was created successfully"
         self.assertEqual(expected_status, resulted_status, msg=message2)
 
-    """  def test_not_create_donor(self):
+    def test_not_create_donor(self):
         
         data_login = {"email": self.user_donor.email, "password": "123456"}
         url_login = reverse("login")
@@ -82,5 +79,14 @@ class ReservationCreateViewTest(APITestCase):
         message2 = "You do not have permission to perform this action."
         self.assertEqual(expected_status, resulted_status, msg=message2)
 
+    def test_list_reservation(self):
+        data_login = {"email": self.user_donor.email, "password": "123456"}
+        url_login = reverse("login")
+        response_login = self.client.post(url_login, data_login)
+        user_token = response_login.data["token"]
+        headers = {"HTTP_AUTHORIZATION": f"Bearer {user_token}"}
+
+        
+            
+
     
- """
