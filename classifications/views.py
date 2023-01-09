@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdm, IsOwnerOrAdm
 from .serializers import ClassificationSerializer
 from .models import Classification
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 
 
 class ClassificationView(generics.ListCreateAPIView):

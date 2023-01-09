@@ -5,6 +5,8 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Donations
 from .serializers import *
 from classifications.models import Classification
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
 
 
 class DonationView(generics.ListCreateAPIView):
@@ -18,7 +20,7 @@ class DonationView(generics.ListCreateAPIView):
         return Donations.objects.all()
 
     def perform_create(self, serializer):
-        classification_id = self.request.data['classification']
+        classification_id = self.request.data["classification"]
         classification = Classification.objects.get(pk=classification_id)
         serializer.save(user=self.request.user, classification=classification)
 
@@ -29,6 +31,7 @@ class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = DonationDetailSerializer
     queryset = Donations.objects.all()
+
 
 class DonationUserView(generics.ListAPIView):
     authentication_classes = [JWTAuthentication]

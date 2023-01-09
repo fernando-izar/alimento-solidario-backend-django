@@ -17,20 +17,30 @@ class UserView(generics.ListCreateAPIView):
     serializer_class = UserSerializer
 
     @extend_schema(
-        operation_id="list_create_user",
+        operation_id="create_user",
         parameters=[
             UserSerializer,
-            OpenApiParameter("pk", OpenApiTypes.UUID, OpenApiParameter.PATH),
-            OpenApiParameter("queryparam1", OpenApiTypes.UUID, OpenApiParameter.QUERY),
         ],
         request=UserSerializer,
         responses={201: UserSerializer},
-        description="Rota para listagem e criação de animais",
-        # summary="Criação de animais",
-        deprecated=True,  # (7)
-        tags=["Users"],  # (8)
-        # exclude=True,
+        description="Rota para criação de usuários",
+        summary="Criação de usuários",
     )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+    @extend_schema(
+        operation_id="list_users",
+        parameters=[
+            UserSerializer,
+        ],
+        responses={201: UserSerializer},
+        description="Rota para listagem de usuários",
+        summary="Listagem de usuários",
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     def dispatch(self, request, *args, **kwargs):
         if request.method == "GET":
             self.authentication_classes = [JWTAuthentication]
@@ -48,20 +58,45 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "pk"
 
     @extend_schema(
-        operation_id="list_create_user",
+        operation_id="get_user_by_id",
         parameters=[
             UserSerializer,
-            OpenApiParameter("pk", OpenApiTypes.UUID, OpenApiParameter.PATH),
-            OpenApiParameter("queryparam1", OpenApiTypes.UUID, OpenApiParameter.QUERY),
         ],
         request=UserSerializer,
         responses={201: UserSerializer},
-        description="Rota para listagem e criação de animais",
-        # summary="Criação de animais",
-        deprecated=True,  # (7)
-        tags=["Users"],  # (8)
-        # exclude=True,
+        description="Rota para mostrar o usuário pelo ID",
+        summary="Mostra o usuário",
     )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @extend_schema(
+        operation_id="update_user_by_id",
+        parameters=[
+            UserSerializer,
+        ],
+        request=UserSerializer,
+        responses={201: UserSerializer},
+        description="Rota para atualizar o usuário pelo ID",
+        summary="Atualiza o usuário",
+    )
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
+
+    @extend_schema(
+        exclude=True,
+    )
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+    @extend_schema(
+        operation_id="delete_user_by_id",
+        description="Rota para excluir o usuário pelo ID",
+        summary="Exclui o usuário",
+    )
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
+
     def update(self, request, *args, **kwargs):
         user = self.get_object()
         if not user.isActive:
@@ -79,20 +114,17 @@ class UserProfileView(generics.ListAPIView):
     serializer_class = UserSerializer
 
     @extend_schema(
-        operation_id="list_create_user",
+        operation_id="list_user_profile",
         parameters=[
             UserSerializer,
-            OpenApiParameter("pk", OpenApiTypes.UUID, OpenApiParameter.PATH),
-            OpenApiParameter("queryparam1", OpenApiTypes.UUID, OpenApiParameter.QUERY),
         ],
-        request=UserSerializer,
         responses={201: UserSerializer},
-        description="Rota para listagem e criação de animais",
-        # summary="Criação de animais",
-        deprecated=True,  # (7)
-        tags=["Users"],  # (8)
-        # exclude=True,
+        description="Rota para mostrar os dados do usuário logado",
+        summary="Mostrar usuário logado",
     )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     def get_queryset(self):
         return User.objects.filter(pk=self.request.user.pk)
 
@@ -106,20 +138,24 @@ class UserSoftDeleteView(generics.UpdateAPIView):
     queryset = User.objects.all()
 
     @extend_schema(
-        operation_id="list_create_user",
+        operation_id="soft_delete_user",
         parameters=[
             UserSerializer,
-            OpenApiParameter("pk", OpenApiTypes.UUID, OpenApiParameter.PATH),
-            OpenApiParameter("queryparam1", OpenApiTypes.UUID, OpenApiParameter.QUERY),
         ],
         request=UserSerializer,
         responses={201: UserSerializer},
-        description="Rota para listagem e criação de animais",
-        # summary="Criação de animais",
-        deprecated=True,  # (7)
-        tags=["Users"],  # (8)
-        # exclude=True,
+        description="Rota para inativar o usuário",
+        summary="Inativação do usuário",
     )
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
+
+    @extend_schema(
+        exclude=True,
+    )
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
     def update(self, request, *args, **kwargs):
         user = self.get_object()
         if not user.isActive:
