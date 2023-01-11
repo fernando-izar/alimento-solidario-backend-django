@@ -3,6 +3,8 @@ from rest_framework.validators import UniqueValidator
 from .models import User, Type
 from addresses.serializers import AddressSerializer
 from addresses.models import Address
+import pywhatkit
+import pyautogui
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -39,6 +41,13 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create(address=address, **validated_data)
         user.set_password(validated_data["password"])
         user.save()
+
+        contact = user.contact
+
+        pywhatkit.sendwhatmsg_instantly(phone_no=contact, message="Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!")
+        pyautogui.click()
+
+
         return user
 
     def update(self, instance, validated_data):
