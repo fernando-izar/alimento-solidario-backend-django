@@ -39,6 +39,7 @@ ALLOWED_HOSTS = [
     "http://alimento-solidario-frontend.vercel.app/",
     "http://alimento-solidario-frontend.vercel.app",
     "alimento-solidario-frontend.vercel.app",
+    "54.207.172.160",
 ]
 
 
