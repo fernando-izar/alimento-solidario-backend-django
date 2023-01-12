@@ -5,6 +5,7 @@ from addresses.serializers import AddressSerializer
 from addresses.models import Address
 import pywhatkit
 import pyautogui
+import time
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,6 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
         contact = user.contact
 
         pywhatkit.sendwhatmsg_instantly(phone_no=contact, message="Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!")
+        time.sleep(2)
         pyautogui.click()
 
 

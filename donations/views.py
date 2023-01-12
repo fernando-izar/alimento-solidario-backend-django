@@ -5,6 +5,8 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from .models import Donations
 from .serializers import *
 from classifications.models import Classification
+import pywhatkit
+import pyautogui
 
 
 class DonationView(generics.ListCreateAPIView):
@@ -21,6 +23,11 @@ class DonationView(generics.ListCreateAPIView):
         classification_id = self.request.data['classification']
         classification = Classification.objects.get(pk=classification_id)
         serializer.save(user=self.request.user, classification=classification)
+
+        contact = self.request.user.contact
+
+        pywhatkit.sendwhatmsg_instantly(phone_no=contact, message="Obrigado pela doação, " + f"{self.request.user.name}!")
+        pyautogui.click()
 
 
 class DonationDetailView(generics.RetrieveUpdateDestroyAPIView):

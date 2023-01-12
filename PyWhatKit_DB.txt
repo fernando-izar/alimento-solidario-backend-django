@@ -78,3 +78,143 @@ Time: 20:32
 Phone Number: +5511985601639
 Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
 --------------------
+Date: 11/1/2023
+Time: 21:52
+Phone Number: +5517981026092
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 11/1/2023
+Time: 22:36
+Phone Number: +5592982144902
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 11/1/2023
+Time: 22:41
+Phone Number: +5511985601639
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 11/1/2023
+Time: 22:42
+Phone Number: +5592982144902
+Message: Obrigado pela doaçãoAlexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:1
+Phone Number: +5517991290889
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 12/1/2023
+Time: 0:4
+Phone Number: +5517991290889
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 12/1/2023
+Time: 0:6
+Phone Number: +5517981026092
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 12/1/2023
+Time: 0:6
+Phone Number: +5592982144902
+Message: Obrigado pela doação Alexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:11
+Phone Number: +5592982144902
+Message: Obrigado pela doação Alexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:17
+Phone Number: +5592982144902
+Message: Obrigado pela doação Alexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:19
+Phone Number: +5592982144902
+Message: Obrigado pela doação Alexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:20
+Phone Number: +5517991290889
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 12/1/2023
+Time: 0:23
+Phone Number: +5517991290889
+Message: Obrigado pela doação Fernando Izar!
+--------------------
+Date: 12/1/2023
+Time: 0:26
+Phone Number: +5517981026092
+Message: Sua reserva foi registrada com sucessoCarlena Izar! Entre em contato com o doador Fernando Izar pelo telefone +5517991290889para combinar a retirada do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:28
+Phone Number: +5517991290889
+Message: Obrigado pela doação Fernando Izar!
+--------------------
+Date: 12/1/2023
+Time: 0:29
+Phone Number: +5517981026092
+Message: Sua reserva foi registrada com sucesso Carlena Izar! Entre em contato com o doador Fernando Izar, pelo telefone +5517991290889, para combinar a retirada do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:30
+Phone Number: +5517991290889
+Message: Sua doação foi reservada Fernando Izar! Entre em contato com o donatário Carlena Izar, através do telefone Carlena Izar, para combinar a entrega do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:34
+Phone Number: +5517991290889
+Message: Obrigado pela doação Fernando Izar!
+--------------------
+Date: 12/1/2023
+Time: 0:34
+Phone Number: +5517981026092
+Message: Sua reserva foi registrada com sucesso, Carlena Izar! Entre em contato com o doador Fernando Izar, pelo telefone +5517991290889, para combinar a retirada do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:35
+Phone Number: +5517991290889
+Message: Sua doação foi reservada, Fernando Izar! Entre em contato com o donatário Carlena Izar, através do telefone +5517981026092, para combinar a entrega do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:37
+Phone Number: +5592982144902
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 12/1/2023
+Time: 0:38
+Phone Number: +5511985601639
+Message: Bem vindo ao Alimento Solidário! Seu cadastro foi realizado com sucesso!
+--------------------
+Date: 12/1/2023
+Time: 0:39
+Phone Number: +5592982144902
+Message: Obrigado pela doação Alexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:40
+Phone Number: +5511985601639
+Message: Sua reserva foi registrada com sucesso, João Dantas! Entre em contato com o doador Alexandre Farias, pelo telefone +5592982144902, para combinar a retirada do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:40
+Phone Number: +5592982144902
+Message: Sua doação foi reservada, Alexandre Farias! Entre em contato com o donatário João Dantas, através do telefone +5511985601639, para combinar a entrega do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:48
+Phone Number: +5592982144902
+Message: Obrigado pela doação, Alexandre Farias!
+--------------------
+Date: 12/1/2023
+Time: 0:49
+Phone Number: +5511985601639
+Message: Sua reserva de 50 sacos de Limão foi registrada com sucesso, João Dantas! Entre em contato com o doador Alexandre Farias, pelo telefone +5592982144902, para combinar a retirada do produto.
+--------------------
+Date: 12/1/2023
+Time: 0:49
+Phone Number: +5592982144902
+Message: Sua doação de 50 sacos de Limão foi reservada, Alexandre Farias! Entre em contato com o donatário João Dantas, através do telefone +5511985601639, para combinar a entrega do produto.
+--------------------
